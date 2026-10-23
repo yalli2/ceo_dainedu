@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>황부연 원장 이력</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +22,8 @@
   --bg:#0c1a1f; --surface:#132a31; --ink:#e7efed; --muted:#9db3b6; --line:#27434b;
   --sea:#0f232a; --land:#223f47; --land-hl:#a8402e; --accent:#ff7357; --accent-ink:#1a0a06; --teal:#5ec4c0; color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.7;
   padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));word-break:keep-all}
 .wrap{max-width:1180px;margin:0 auto}
@@ -150,6 +157,9 @@ a{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}</style>
+</head>
+<body>
 <div class="wrap">
   <section class="hero">
     <div>
@@ -369,3 +379,5 @@ document.addEventListener("keydown",function(e){if(lb.hidden)return;if(e.key==="
 var sx=null;lb.addEventListener("touchstart",function(e){sx=e.touches[0].clientX},{passive:true});
 lb.addEventListener("touchend",function(e){if(sx===null)return;var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(li_+(d<0?1:-1));sx=null},{passive:true});
 </script>
+</body>
+</html>
