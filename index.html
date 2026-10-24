@@ -360,9 +360,9 @@ setView();overview();
 
 /* ===== 사진첩과 라이트박스 ===== */
 var grid=document.getElementById("grid");
-GAL.forEach(function(k,i){var b=document.createElement("button");b.type="button";b.innerHTML='<img src="'+PHOTOS[k].src+'" alt="'+esc(PHOTOS[k].cap)+'" loading="lazy"><span>'+esc(PHOTOS[k].cap)+'</span>';b.onclick=function(){openLB(SLIDES.indexOf(k),false)};grid.appendChild(b)});
-var lb=document.getElementById("lb"),li_=0,timer=null;
 var SLIDES=GAL.slice().reverse();
+SLIDES.forEach(function(k,i){var b=document.createElement("button");b.type="button";b.innerHTML='<img src="'+PHOTOS[k].src+'" alt="'+esc(PHOTOS[k].cap)+'" loading="lazy"><span>'+esc(PHOTOS[k].cap)+'</span>';b.onclick=function(){openLB(i,false)};grid.appendChild(b)});
+var lb=document.getElementById("lb"),li_=0,timer=null;
 function show(i){li_=(i+SLIDES.length)%SLIDES.length;var p=PHOTOS[SLIDES[li_]];var im=document.getElementById("lbImg");im.src=p.src;im.alt=p.cap;
   document.getElementById("lbCap").textContent=p.cap;document.getElementById("lbCount").textContent=(li_+1)+" / "+SLIDES.length}
 function play(on){clearInterval(timer);timer=null;document.getElementById("lbPlay").textContent=on?"일시정지":"자동 재생";if(on)timer=setInterval(function(){show(li_+1)},3200)}
