@@ -346,7 +346,7 @@ function render(i){var c=CH[i];
   '<div class="shots">'+shots+'</div>'+
   '<div class="nav"><button class="btn ghost" type="button" id="pv">'+(i>0?'‹ '+CH[i-1].name:'‹ 처음으로')+'</button>'+
   '<button class="btn" type="button" id="nx">'+(i<CH.length-1?CH[i+1].name+' ›':'사진첩 보기 ›')+'</button></div></div>';
-  panel.querySelectorAll(".shots button").forEach(function(b){b.onclick=function(){openLB(GAL.indexOf(b.dataset.k),false)}});
+  panel.querySelectorAll(".shots button").forEach(function(b){b.onclick=function(){openLB(SLIDES.indexOf(b.dataset.k),false)}});
   document.getElementById("pv").onclick=function(){go(i>0?i-1:-1)};
   document.getElementById("nx").onclick=function(){if(i<CH.length-1)go(i+1);else document.getElementById("gallery").scrollIntoView({behavior:"smooth"})}}
 function go(i){cur=i;
@@ -360,10 +360,11 @@ setView();overview();
 
 /* ===== 사진첩과 라이트박스 ===== */
 var grid=document.getElementById("grid");
-GAL.forEach(function(k,i){var b=document.createElement("button");b.type="button";b.innerHTML='<img src="'+PHOTOS[k].src+'" alt="'+esc(PHOTOS[k].cap)+'" loading="lazy"><span>'+esc(PHOTOS[k].cap)+'</span>';b.onclick=function(){openLB(i,false)};grid.appendChild(b)});
+GAL.forEach(function(k,i){var b=document.createElement("button");b.type="button";b.innerHTML='<img src="'+PHOTOS[k].src+'" alt="'+esc(PHOTOS[k].cap)+'" loading="lazy"><span>'+esc(PHOTOS[k].cap)+'</span>';b.onclick=function(){openLB(SLIDES.indexOf(k),false)};grid.appendChild(b)});
 var lb=document.getElementById("lb"),li_=0,timer=null;
-function show(i){li_=(i+GAL.length)%GAL.length;var p=PHOTOS[GAL[li_]];var im=document.getElementById("lbImg");im.src=p.src;im.alt=p.cap;
-  document.getElementById("lbCap").textContent=p.cap;document.getElementById("lbCount").textContent=(li_+1)+" / "+GAL.length}
+var SLIDES=GAL.slice().reverse();
+function show(i){li_=(i+SLIDES.length)%SLIDES.length;var p=PHOTOS[SLIDES[li_]];var im=document.getElementById("lbImg");im.src=p.src;im.alt=p.cap;
+  document.getElementById("lbCap").textContent=p.cap;document.getElementById("lbCount").textContent=(li_+1)+" / "+SLIDES.length}
 function play(on){clearInterval(timer);timer=null;document.getElementById("lbPlay").textContent=on?"일시정지":"자동 재생";if(on)timer=setInterval(function(){show(li_+1)},3200)}
 function openLB(i,auto){lb.classList.add("open");document.body.style.overflow="hidden";show(i);play(!!auto);document.getElementById("lbClose").focus()}
 function closeLB(){lb.classList.remove("open");document.body.style.overflow="";play(false)}
